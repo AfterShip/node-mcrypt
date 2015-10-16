@@ -5,7 +5,7 @@
             "sources": [
                 "src/mcrypt.cc"
             ],
-            "ldflags": [ 
+            "libraries": [
                 "-lmcrypt"
             ],
             "include_dirs": [
