@@ -206,6 +206,10 @@ NAN_METHOD(MCrypt::Open) {
     return;
 }
 
+static void freeCipherText(char *cipherText, void *) {
+    delete[] cipherText;
+}
+
 NAN_METHOD(MCrypt::Encrypt) {
     Nan::HandleScope scope;
     
@@ -242,8 +246,7 @@ NAN_METHOD(MCrypt::Encrypt) {
         Nan::ThrowError(error);
     }
 
-    Local<Object> retVal = Nan::NewBuffer(cipherText, length).ToLocalChecked();
-    delete[] cipherText;
+    Local<Object> retVal = Nan::NewBuffer(cipherText, length, freeCipherText, 0).ToLocalChecked();
 
     info.GetReturnValue().Set(retVal);
 }
@@ -283,8 +286,7 @@ NAN_METHOD(MCrypt::Decrypt) {
         Nan::ThrowError(error);
     }
 
-    Local<Object> retVal = Nan::NewBuffer(cipherText, length).ToLocalChecked();
-    delete[] cipherText;
+    Local<Object> retVal = Nan::NewBuffer(cipherText, length, freeCipherText, 0).ToLocalChecked();
 
     info.GetReturnValue().Set(retVal);
 }
