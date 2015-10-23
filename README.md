@@ -5,7 +5,7 @@ MCrypt bindings for Node.js
 ## Install
 
 ```
-npm install mcrypt
+npm install @aftership/mcrypt
 ```
 
 ## Introduction
